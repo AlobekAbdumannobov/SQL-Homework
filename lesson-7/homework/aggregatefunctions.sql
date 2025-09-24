@@ -124,7 +124,6 @@ GROUP BY DepartmentName
 HAVING AVG(Salary) > 65000;
 
 -- 4. Orders with freight > 50 (TSQL2012 db reference)
--- Example query for idea:
 -- SELECT CustomerID,
 --        SUM(Freight) AS TotalFreight,
 --        MIN(Freight) AS LeastPurchase
