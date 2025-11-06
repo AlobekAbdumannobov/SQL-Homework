@@ -247,27 +247,27 @@ WHERE
 --(7, 'Earbuds', 100, 2);
 
 
---with cte as (
---select *, rank() over(partition by category_id order by price desc) as ProductRank from products
---) 
---select id, product_name, price, category_id from cte 
---where ProductRank = 3
+with cte as (
+select *, rank() over(partition by category_id order by price desc) as ProductRank from products
+) 
+select id, product_name, price, category_id from cte 
+where ProductRank = 3
 
-SELECT
-    p.id,
-    p.product_name,
-    p.price,
-    p.category_id
-FROM
-    products p -- Tashqi so'rov: Mahsulotlar jadvali
-WHERE
- 3= (
-        -- Korrelyatsiyalangan Subquery: Joriy mahsulot (p) uchun uchinchi eng yuqori narxni tekshirish
-        SELECT COUNT(DISTINCT p_inner.price) -- Noyob narxlarni sanash
-        FROM products p_inner
-        WHERE p_inner.category_id = p.category_id -- 1. O'sha kategoriya ichida bo'lishi kerak
-          AND p_inner.price >= p.price          -- 2. Joriy mahsulot narxidan (p.price) katta yoki teng bo'lishi kerak
-    );
+--SELECT
+--    p.id,
+--    p.product_name,
+--    p.price,
+--    p.category_id
+--FROM
+--    products p -- Tashqi so'rov: Mahsulotlar jadvali
+--WHERE
+-- 3= (
+--        -- Korrelyatsiyalangan Subquery: Joriy mahsulot (p) uchun uchinchi eng yuqori narxni tekshirish
+--        SELECT COUNT(DISTINCT p_inner.price) -- Noyob narxlarni sanash
+--        FROM products p_inner
+--        WHERE p_inner.category_id = p.category_id -- 1. O'sha kategoriya ichida bo'lishi kerak
+--          AND p_inner.price >= p.price          -- 2. Joriy mahsulot narxidan (p.price) katta yoki teng bo'lishi kerak
+--    );
 
 --10 Find Employees whose Salary Between Company Average and Department Max Salary
 -- 
